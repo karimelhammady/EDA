@@ -1,0 +1,70 @@
+-- VHDL data flow description generated from `sdetr_b`
+--		date : Tue Apr 30 21:03:11 2019
+
+
+-- Entity Declaration
+
+ENTITY sdetr_b IS
+  PORT (
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  day_time : in BIT;	-- day_time
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  clk : in BIT;	-- clk
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END sdetr_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF sdetr_b IS
+  SIGNAL fsm_alarm_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- fsm_alarm_cs
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux8 : BIT;		-- aux8
+  SIGNAL aux9 : BIT;		-- aux9
+  SIGNAL aux10 : BIT;		-- aux10
+  SIGNAL aux11 : BIT;		-- aux11
+  SIGNAL aux12 : BIT;		-- aux12
+
+BEGIN
+  aux12 <= (NOT(reset) AND NOT(code(1)));
+  aux11 <= (NOT(reset) AND code(1));
+  aux10 <= (code(3) OR code(0));
+  aux9 <= (NOT(fsm_alarm_cs(0)) AND NOT(reset));
+  aux8 <= ((((NOT(code(2)) OR fsm_alarm_cs(2)) OR (code(3) 
+OR NOT(code(0)))) AND aux3) OR fsm_alarm_cs(0));
+  aux3 <= (fsm_alarm_cs(1) XOR fsm_alarm_cs(2));
+  aux2 <= ((NOT(day_time) OR NOT(code(2))) OR NOT(code(3)));
+  aux0 <= NOT(NOT(fsm_alarm_cs(1)) AND NOT(code(2)));
+  label0 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (0) <= GUARDED ((((NOT(aux0) AND fsm_alarm_cs(2) AND code(3)) OR
+ (NOT(fsm_alarm_cs(1) XOR code(2)) AND NOT(
+fsm_alarm_cs(2)) AND NOT(code(3)))) AND NOT(code(0)) AND 
+fsm_alarm_cs(0) AND code(1)) OR ((NOT(fsm_alarm_cs(1)) OR 
+fsm_alarm_cs(2)) AND NOT(fsm_alarm_cs(0))) OR reset);
+  END BLOCK label0;
+  label1 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (1) <= GUARDED (((((NOT(fsm_alarm_cs(1)) OR NOT(code(2)) OR 
+fsm_alarm_cs(2) OR aux10) AND fsm_alarm_cs(0)) OR (aux3 AND NOT(
+fsm_alarm_cs(0)))) AND aux11) OR (aux8 AND (aux2 OR NOT(code(0))
+) AND aux12));
+  END BLOCK label1;
+  label2 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (2) <= GUARDED (((((aux0 OR aux10) AND fsm_alarm_cs(0)) OR aux3)
+ AND aux11) OR (aux8 AND ((aux2 AND code(0)) OR ((
+NOT(fsm_alarm_cs(1)) OR code(2) OR NOT(
+fsm_alarm_cs(2)) OR code(3)) AND NOT(code(0)))) AND aux12));
+  END BLOCK label2;
+
+alarm <= (fsm_alarm_cs(2) AND aux9);
+
+door <= (NOT(fsm_alarm_cs(1)) AND aux9);
+END;

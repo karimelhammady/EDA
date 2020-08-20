@@ -1,0 +1,66 @@
+-- VHDL data flow description generated from `sdeta_b`
+--		date : Tue Apr 30 21:03:10 2019
+
+
+-- Entity Declaration
+
+ENTITY sdeta_b IS
+  PORT (
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  day_time : in BIT;	-- day_time
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  clk : in BIT;	-- clk
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END sdeta_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF sdeta_b IS
+  SIGNAL fsm_alarm_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- fsm_alarm_cs
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux4 : BIT;		-- aux4
+  SIGNAL aux5 : BIT;		-- aux5
+
+BEGIN
+  aux5 <= (NOT(reset) AND aux4);
+  aux4 <= (NOT(fsm_alarm_cs(0)) AND NOT(fsm_alarm_cs(1)));
+  aux3 <= (aux1 AND NOT(reset));
+  aux2 <= (NOT(code(0)) AND fsm_alarm_cs(2));
+  aux1 <= ((NOT(code(0)) AND NOT(fsm_alarm_cs(2))) AND NOT(
+code(3)));
+  label0 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs (0) <= GUARDED (reset OR (aux2 AND code(3) AND NOT(code(2)) AND 
+code(1) AND fsm_alarm_cs(1)) OR (((aux1 AND NOT(code(2))
+ AND NOT(code(1))) OR NOT(fsm_alarm_cs(0))) AND 
+NOT(fsm_alarm_cs(1))));
+  END BLOCK label0;
+  label1 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs (1) <= GUARDED ((aux2 AND NOT(code(3)) AND NOT(reset) AND NOT(
+code(2)) AND code(1) AND fsm_alarm_cs(0)) OR (aux3 AND 
+code(2) AND code(1) AND NOT(fsm_alarm_cs(0)) AND 
+fsm_alarm_cs(1)) OR (aux3 AND NOT(code(2)) AND NOT(code(1)) AND 
+fsm_alarm_cs(0) AND NOT(fsm_alarm_cs(1))));
+  END BLOCK label1;
+  label2 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs (2) <= GUARDED ((code(0) AND code(3) AND code(2) AND NOT(code(1)
+) AND day_time) OR (aux1 AND code(2) AND code(1) 
+AND NOT(fsm_alarm_cs(0))) OR reset OR ((NOT(code(3))
+ OR day_time) AND code(0) AND code(2) AND NOT(
+code(1)) AND fsm_alarm_cs(0) AND fsm_alarm_cs(1)) OR 
+aux4);
+  END BLOCK label2;
+
+alarm <= (NOT(fsm_alarm_cs(2)) AND aux5);
+
+door <= (fsm_alarm_cs(2) AND aux5);
+END;

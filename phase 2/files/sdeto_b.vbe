@@ -1,0 +1,88 @@
+-- VHDL data flow description generated from `sdeto_b`
+--		date : Tue Apr 30 21:03:11 2019
+
+
+-- Entity Declaration
+
+ENTITY sdeto_b IS
+  PORT (
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  day_time : in BIT;	-- day_time
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  clk : in BIT;	-- clk
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END sdeto_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF sdeto_b IS
+  SIGNAL fsm_alarm_cs : REG_VECTOR(6 DOWNTO 0) REGISTER;	-- fsm_alarm_cs
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux4 : BIT;		-- aux4
+  SIGNAL aux6 : BIT;		-- aux6
+  SIGNAL aux7 : BIT;		-- aux7
+  SIGNAL aux8 : BIT;		-- aux8
+  SIGNAL aux9 : BIT;		-- aux9
+
+BEGIN
+  aux9 <= (NOT(reset) AND NOT(code(1)));
+  aux8 <= (fsm_alarm_cs(5) OR fsm_alarm_cs(4) OR 
+fsm_alarm_cs(3));
+  aux7 <= (NOT(reset) AND code(1));
+  aux6 <= NOT((NOT(code(3)) OR code(2)) OR code(0));
+  aux4 <= NOT(aux2 OR code(0));
+  aux3 <= (fsm_alarm_cs(6) OR fsm_alarm_cs(2));
+  aux2 <= (code(3) OR NOT(code(2)));
+  aux1 <= NOT(code(3) OR code(2));
+  label0 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (0) <= GUARDED ((((NOT(aux6) AND fsm_alarm_cs(4)) OR (NOT(aux4) 
+AND fsm_alarm_cs(5)) OR ((NOT(aux1) OR 
+fsm_alarm_cs(2) OR code(0)) AND aux3) OR fsm_alarm_cs(3)) AND 
+aux7) OR (((fsm_alarm_cs(2) AND NOT(code(0))) OR (
+aux2 AND fsm_alarm_cs(2)) OR fsm_alarm_cs(6) OR aux8)
+ AND (NOT(aux1) OR fsm_alarm_cs(6) OR 
+fsm_alarm_cs(2) OR code(0) OR (fsm_alarm_cs(5) OR 
+fsm_alarm_cs(4))) AND (NOT(code(3)) OR NOT(day_time) OR NOT(
+code(2)) OR NOT(code(0))) AND aux9));
+  END BLOCK label0;
+  label1 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (1) <= GUARDED ((aux3 OR aux8) AND (code(3) OR fsm_alarm_cs(2)) 
+AND (NOT(code(3)) OR day_time) AND code(2) AND 
+code(0) AND aux9);
+  END BLOCK label1;
+  label2 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (2) <= GUARDED (aux1 AND NOT(code(0)) AND fsm_alarm_cs(3) AND 
+aux9);
+  END BLOCK label2;
+  label3 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (3) <= GUARDED (aux6 AND fsm_alarm_cs(4) AND aux7);
+  END BLOCK label3;
+  label4 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (4) <= GUARDED (aux4 AND fsm_alarm_cs(5) AND aux7);
+  END BLOCK label4;
+  label5 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (5) <= GUARDED (aux1 AND fsm_alarm_cs(6) AND NOT(code(0)) AND 
+aux7);
+  END BLOCK label5;
+  label6 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (6) <= GUARDED (fsm_alarm_cs(1) OR fsm_alarm_cs(0) OR reset);
+  END BLOCK label6;
+
+alarm <= (fsm_alarm_cs(0) AND NOT(reset));
+
+door <= (fsm_alarm_cs(1) AND NOT(reset));
+END;

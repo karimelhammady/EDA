@@ -1,0 +1,105 @@
+N:a2_x2_2_sig:19:1276 ps
+N:a2_x2_sig:7:525 ps
+N:alarm:28:1881 ps
+N:aux2:20:1370 ps
+N:clk:0:0 ps
+N:code 0:0:0 ps
+N:code 1:0:0 ps
+N:code 2:0:0 ps
+N:code 3:0:0 ps
+N:day_time:0:0 ps
+N:door:28:1881 ps
+N:fsm_alarm_cs 0:8:546 ps
+N:fsm_alarm_cs 1:8:545 ps
+N:fsm_alarm_cs 2:7:512 ps
+N:inv_x2_sig:2:140 ps
+N:mbk_buf_fsm_alarm_cs 2:14:953 ps
+N:na2_x1_2_sig:5:371 ps
+N:na2_x1_3_sig:20:1383 ps
+N:na2_x1_4_sig:3:212 ps
+N:na2_x1_5_sig:12:822 ps
+N:na2_x1_sig:3:212 ps
+N:na3_x1_2_sig:24:1642 ps
+N:na3_x1_3_sig:32:2148 ps
+N:na3_x1_4_sig:24:1642 ps
+N:na3_x1_5_sig:27:1848 ps
+N:na3_x1_6_sig:27:1876 ps
+N:na3_x1_sig:28:1902 ps
+N:na4_x1_2_sig:13:904 ps
+N:na4_x1_sig:25:1729 ps
+N:nao22_x1_sig:22:1507 ps
+N:no2_x1_2_sig:17:1174 ps
+N:no2_x1_sig:23:1564 ps
+N:no3_x1_2_sig:18:1214 ps
+N:no3_x1_3_sig:23:1592 ps
+N:no3_x1_4_sig:7:514 ps
+N:no3_x1_sig:7:527 ps
+N:no4_x1_2_sig:9:616 ps
+N:no4_x1_sig:8:553 ps
+N:not_aux1:13:926 ps
+N:not_aux3:19:1317 ps
+N:not_aux4:13:939 ps
+N:not_aux5:19:1329 ps
+N:not_code 0:2:186 ps
+N:not_code 1:2:164 ps
+N:not_code 2:0:0 ps
+N:not_code 3:2:182 ps
+N:not_day_time:2:162 ps
+N:not_fsm_alarm_cs 0:10:735 ps
+N:not_fsm_alarm_cs 1:10:714 ps
+N:not_fsm_alarm_cs 2:16:1118 ps
+N:not_reset:2:156 ps
+N:reset:0:0 ps
+B:mbk_buf_fsm_alarm_cs 2:14:953 ps
+B:door_ins:28:1881 ps
+B:alarm_ins:28:1881 ps
+B:fsm_alarm_cs_2_ins:7:512 ps
+B:na4_x1_ins:25:1729 ps
+B:na2_x1_5_ins:12:822 ps
+B:no4_x1_2_ins:9:616 ps
+B:a2_x2_2_ins:19:1276 ps
+B:na2_x1_3_ins:20:1383 ps
+B:no2_x1_2_ins:17:1174 ps
+B:na2_x1_4_ins:3:212 ps
+B:na4_x1_2_ins:13:904 ps
+B:na2_x1_2_ins:5:371 ps
+B:no3_x1_4_ins:7:514 ps
+B:inv_x2_ins:2:140 ps
+B:fsm_alarm_cs_1_ins:8:545 ps
+B:na3_x1_3_ins:32:2148 ps
+B:na3_x1_6_ins:27:1876 ps
+B:no3_x1_3_ins:23:1592 ps
+B:na3_x1_5_ins:27:1848 ps
+B:no2_x1_ins:23:1564 ps
+B:na2_x1_ins:3:212 ps
+B:na3_x1_4_ins:24:1642 ps
+B:no4_x1_ins:8:553 ps
+B:fsm_alarm_cs_0_ins:8:546 ps
+B:na3_x1_ins:28:1902 ps
+B:nao22_x1_ins:22:1507 ps
+B:no3_x1_2_ins:18:1214 ps
+B:na3_x1_2_ins:24:1642 ps
+B:no3_x1_ins:7:527 ps
+B:aux2_ins:20:1370 ps
+B:not_day_time_ins:2:162 ps
+B:not_reset_ins:2:156 ps
+B:not_code_0_ins:2:186 ps
+B:not_code_1_ins:2:164 ps
+B:not_code_3_ins:2:182 ps
+B:not_fsm_alarm_cs_2_ins:16:1118 ps
+B:not_fsm_alarm_cs_1_ins:10:714 ps
+B:not_aux1_ins:13:926 ps
+B:a2_x2_ins:7:525 ps
+B:not_fsm_alarm_cs_0_ins:10:735 ps
+B:not_aux3_ins:19:1317 ps
+B:not_aux4_ins:13:939 ps
+B:not_aux5_ins:19:1329 ps
+C:alarm:28:1881 ps
+C:door:28:1881 ps
+C:clk:0:0 ps
+C:day_time:0:0 ps
+C:reset:0:0 ps
+C:code 0:0:0 ps
+C:code 1:0:0 ps
+C:code 2:0:0 ps
+C:code 3:0:0 ps

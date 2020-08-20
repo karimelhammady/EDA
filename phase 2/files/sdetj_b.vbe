@@ -1,0 +1,64 @@
+-- VHDL data flow description generated from `sdetj_b`
+--		date : Wed May  1 07:29:24 2019
+
+
+-- Entity Declaration
+
+ENTITY sdetj_b IS
+  PORT (
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  day_time : in BIT;	-- day_time
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  clk : in BIT;	-- clk
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END sdetj_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF sdetj_b IS
+  SIGNAL fsm_alarm_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- fsm_alarm_cs
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux4 : BIT;		-- aux4
+
+BEGIN
+  aux4 <= (NOT(code(0)) AND code(1));
+  aux3 <= (aux0 OR reset);
+  aux2 <= (fsm_alarm_cs(2) AND NOT(code(2)));
+  aux1 <= (aux0 AND NOT(reset));
+  aux0 <= (NOT(fsm_alarm_cs(1)) AND NOT(fsm_alarm_cs(2)));
+  label0 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs (0) <= GUARDED ((code(2) AND code(3) AND code(0) AND NOT(code(1)
+) AND day_time) OR aux3 OR ((NOT(code(3)) OR NOT(
+fsm_alarm_cs(0))) AND (fsm_alarm_cs(1) OR code(3)) AND aux2 AND 
+aux4) OR (fsm_alarm_cs(1) AND code(2) AND NOT(code(3)
+) AND NOT(fsm_alarm_cs(0)) AND code(0) AND NOT(
+code(1))));
+  END BLOCK label0;
+  label1 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs (1) <= GUARDED (aux3 OR (aux2 AND code(3) AND NOT(
+fsm_alarm_cs(0)) AND aux4) OR (NOT(fsm_alarm_cs(2)) AND NOT(
+code(2)) AND NOT(code(3)) AND fsm_alarm_cs(0) AND NOT(
+code(0)) AND NOT(code(1))));
+  END BLOCK label1;
+  label2 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs (2) <= GUARDED ((((NOT(fsm_alarm_cs(1)) AND code(2) AND NOT(
+code(3)) AND fsm_alarm_cs(0)) OR (fsm_alarm_cs(1) AND 
+fsm_alarm_cs(2) AND NOT(code(2)) AND NOT(code(3)))) AND aux4) OR
+ aux3);
+  END BLOCK label2;
+
+alarm <= (aux1 AND NOT(fsm_alarm_cs(0)));
+
+door <= (aux1 AND fsm_alarm_cs(0));
+END;

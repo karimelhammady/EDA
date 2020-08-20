@@ -1,0 +1,81 @@
+V ALLIANCE : 6
+H sdet_p,P,13/ 5/2019,100
+A 0,0,28500,25000
+C 0,4000,200,scanin,0,WEST,ALU2
+C 0,12500,200,day_time,0,WEST,ALU2
+C 0,21000,200,code 0,0,WEST,ALU2
+C 4500,25000,200,code 1,0,NORTH,ALU2
+C 14000,25000,200,code 2,0,NORTH,ALU2
+C 23500,25000,200,code 3,0,NORTH,ALU2
+C 28500,6000,200,test,0,EAST,ALU2
+C 28500,18500,200,reset,0,EAST,ALU2
+C 3500,0,200,door,0,SOUTH,ALU2
+C 10500,0,200,clk,0,SOUTH,ALU2
+C 17500,0,200,alarm,0,SOUTH,ALU2
+C 24500,0,200,scanout,0,SOUTH,ALU2
+I 27500,20000,tie_x0,tiex0_25,SYM_Y
+I 27500,15000,tie_x0,tiex0_24,NOSYM
+I 27500,0,tie_x0,tiex0_23,SYM_Y
+I 25000,20000,tie_x0,tiex0_22,SYM_Y
+I 24500,15000,tie_x0,tiex0_21,NOSYM
+I 23500,15000,tie_x0,tiex0_20,NOSYM
+I 22500,20000,tie_x0,tiex0_19,SYM_Y
+I 22500,0,rowend_x0,rowendx0_18,SYM_Y
+I 21500,20000,tie_x0,tiex0_17,SYM_Y
+I 19500,15000,tie_x0,tiex0_16,NOSYM
+I 17500,20000,tie_x0,tiex0_15,SYM_Y
+I 16500,15000,tie_x0,tiex0_14,NOSYM
+I 15000,20000,tie_x0,tiex0_13,SYM_Y
+I 13500,15000,tie_x0,tiex0_12,NOSYM
+I 12000,20000,tie_x0,tiex0_11,SYM_Y
+I 10000,15000,tie_x0,tiex0_10,NOSYM
+I 9500,20000,tie_x0,tiex0_9,SYM_Y
+I 9000,15000,tie_x0,tiex0_8,NOSYM
+I 8500,20000,tie_x0,tiex0_7,SYM_Y
+I 5500,15000,tie_x0,tiex0_6,NOSYM
+I 5500,5000,rowend_x0,rowendx0_5,NOSYM
+I 4500,20000,tie_x0,tiex0_4,SYM_Y
+I 4500,15000,tie_x0,tiex0_3,NOSYM
+I 3500,20000,tie_x0,tiex0_2,SYM_Y
+I 1500,15000,tie_x0,tiex0_1,NOSYM
+I 16000,20000,inv_x2,not_code_1_ins,SYM_Y
+I 23500,20000,inv_x2,inv_x2_ins,SYM_Y
+I 26000,20000,inv_x2,not_code_2_ins,SYM_Y
+I 10500,20000,inv_x2,not_aux4_ins,SYM_Y
+I 13000,20000,no2_x1,aux4_ins,SYM_Y
+I 18500,20000,no4_x1,no4_x1_2_ins,SYM_Y
+I 5500,20000,noa22_x1,noa22_x1_ins,SYM_Y
+I 0,20000,a4_x2,a4_x2_ins,SYM_Y
+I 11000,15000,na3_x1,na3_x1_2_ins,NOSYM
+I 25500,15000,no2_x1,no2_x1_3_ins,NOSYM
+I 17500,15000,na2_x1,na2_x1_ins,NOSYM
+I 0,15000,inv_x2,not_code_3_ins,NOSYM
+I 14500,15000,na2_x1,na2_x1_2_ins,NOSYM
+I 20500,15000,no4_x1,no4_x1_ins,NOSYM
+I 6500,15000,na3_x1,na3_x1_ins,NOSYM
+I 2500,15000,no2_x1,no2_x1_ins,NOSYM
+I 24000,10000,a2_x2,a2_x2_ins,SYM_Y
+I 5000,10000,inv_x2,not_aux3_ins,SYM_Y
+I 9500,10000,sff2_x4,fsm_alarm_cs_2_ins_scan_2,SYM_Y
+I 26500,10000,no2_x1,no2_x1_2_ins,SYM_Y
+I 21500,10000,na3_x1,na3_x1_7_ins,SYM_Y
+I 2500,10000,na3_x1,na3_x1_3_ins,SYM_Y
+I 6500,10000,nao22_x1,nao22_x1_ins,SYM_Y
+I 0,10000,o2_x2,o2_x2_ins,SYM_Y
+I 8500,5000,na3_x1,na3_x1_5_ins,NOSYM
+I 11000,5000,inv_x2,not_fsm_alarm_cs_2_ins,NOSYM
+I 12500,5000,sff2_x4,fsm_alarm_cs_1_ins_scan_1,NOSYM
+I 6000,5000,na3_x1,na3_x1_4_ins,NOSYM
+I 24500,5000,inv_x2,not_fsm_alarm_cs_1_ins,NOSYM
+I 0,5000,o3_x2,o3_x2_ins,NOSYM
+I 26000,5000,na3_x1,na3_x1_6_ins,NOSYM
+I 3000,5000,o2_x2,not_aux2_ins,NOSYM
+I 0,0,inv_x2,not_fsm_alarm_cs_0_ins,SYM_Y
+I 3500,0,sff2_x4,fsm_alarm_cs_0_ins_scan_0,SYM_Y
+I 15500,0,no2_x1,alarm_ins,SYM_Y
+I 17500,0,on12_x1,aux3_ins,SYM_Y
+I 1500,0,no2_x1,door_ins,SYM_Y
+I 23000,0,o2_x2,not_aux0_ins,SYM_Y
+I 20000,0,o2_x2,not_aux1_ins,SYM_Y
+I 25500,0,buf_x2,buf_scan_3,SYM_Y
+EOF

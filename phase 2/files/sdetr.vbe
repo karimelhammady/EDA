@@ -1,0 +1,109 @@
+-- VHDL data flow description generated from `sdetr`
+--		date : Tue Apr 30 21:03:11 2019
+
+
+-- Entity Declaration
+
+ENTITY sdetr IS
+  PORT (
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  day_time : in BIT;	-- day_time
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  clk : in BIT;	-- clk
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END sdetr;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE VBE OF sdetr IS
+  SIGNAL fsm_alarm_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- fsm_alarm_cs
+  SIGNAL fsm_alarm_cs_ss6 : BIT;		-- fsm_alarm_cs_ss6
+  SIGNAL fsm_alarm_ns_ss6 : BIT;		-- fsm_alarm_ns_ss6
+  SIGNAL fsm_alarm_cs_ss5 : BIT;		-- fsm_alarm_cs_ss5
+  SIGNAL fsm_alarm_ns_ss5 : BIT;		-- fsm_alarm_ns_ss5
+  SIGNAL fsm_alarm_cs_ss4 : BIT;		-- fsm_alarm_cs_ss4
+  SIGNAL fsm_alarm_ns_ss4 : BIT;		-- fsm_alarm_ns_ss4
+  SIGNAL fsm_alarm_cs_ss3 : BIT;		-- fsm_alarm_cs_ss3
+  SIGNAL fsm_alarm_ns_ss3 : BIT;		-- fsm_alarm_ns_ss3
+  SIGNAL fsm_alarm_cs_ss2 : BIT;		-- fsm_alarm_cs_ss2
+  SIGNAL fsm_alarm_ns_ss2 : BIT;		-- fsm_alarm_ns_ss2
+  SIGNAL fsm_alarm_cs_ss1 : BIT;		-- fsm_alarm_cs_ss1
+  SIGNAL fsm_alarm_ns_ss1 : BIT;		-- fsm_alarm_ns_ss1
+  SIGNAL fsm_alarm_cs_ss0 : BIT;		-- fsm_alarm_cs_ss0
+  SIGNAL fsm_alarm_ns_ss0 : BIT;		-- fsm_alarm_ns_ss0
+  SIGNAL fsm_alarm_ns : BIT_VECTOR(2 DOWNTO 0);	-- fsm_alarm_ns
+
+BEGIN
+  fsm_alarm_ns(0) <= (fsm_alarm_ns_ss0 OR fsm_alarm_ns_ss1 OR 
+fsm_alarm_ns_ss2 OR fsm_alarm_ns_ss3);
+  fsm_alarm_ns(1) <= (fsm_alarm_ns_ss1 OR fsm_alarm_ns_ss3 OR 
+fsm_alarm_ns_ss4 OR fsm_alarm_ns_ss6);
+  fsm_alarm_ns(2) <= (fsm_alarm_ns_ss2 OR fsm_alarm_ns_ss3 OR 
+fsm_alarm_ns_ss6);
+  fsm_alarm_ns_ss0 <= (fsm_alarm_cs_ss5 OR fsm_alarm_cs_ss6);
+  fsm_alarm_cs_ss0 <= (NOT(fsm_alarm_cs(2)) AND NOT(fsm_alarm_cs(1)) 
+AND fsm_alarm_cs(0));
+  fsm_alarm_ns_ss1 <= (fsm_alarm_cs_ss0 AND NOT(code(0)) AND code(1) 
+AND NOT(code(2)) AND NOT(code(3)));
+  fsm_alarm_cs_ss1 <= (NOT(fsm_alarm_cs(2)) AND fsm_alarm_cs(1) AND 
+fsm_alarm_cs(0));
+  fsm_alarm_ns_ss2 <= (fsm_alarm_cs_ss1 AND NOT(code(0)) AND code(1) 
+AND code(2) AND NOT(code(3)));
+  fsm_alarm_cs_ss2 <= (fsm_alarm_cs(2) AND NOT(fsm_alarm_cs(1)));
+  fsm_alarm_ns_ss3 <= (fsm_alarm_cs_ss2 AND NOT(code(0)) AND code(1) 
+AND NOT(code(2)) AND code(3));
+  fsm_alarm_cs_ss3 <= (fsm_alarm_cs(2) AND fsm_alarm_cs(1) AND 
+fsm_alarm_cs(0));
+  fsm_alarm_ns_ss4 <= (fsm_alarm_cs_ss3 AND NOT(code(0)) AND NOT(
+code(1)) AND NOT(code(2)) AND NOT(code(3)));
+  fsm_alarm_cs_ss4 <= (NOT(fsm_alarm_cs(2)) AND fsm_alarm_cs(1) AND NOT
+(fsm_alarm_cs(0)));
+  fsm_alarm_ns_ss5 <= ((fsm_alarm_cs_ss0 AND day_time AND code(0) AND 
+NOT(code(1)) AND code(2) AND code(3)) OR (
+fsm_alarm_cs_ss1 AND day_time AND code(0) AND NOT(code(1)) AND 
+code(2) AND code(3)) OR (fsm_alarm_cs_ss2 AND day_time 
+AND code(0) AND NOT(code(1)) AND code(2) AND code(3)
+) OR (fsm_alarm_cs_ss3 AND day_time AND code(0) 
+AND NOT(code(1)) AND code(2) AND code(3)) OR (
+fsm_alarm_cs_ss4 AND ((code(0) AND NOT(code(1)) AND code(2) AND 
+NOT(code(3))) OR (day_time AND code(0) AND NOT(
+code(1)) AND code(2)))));
+  fsm_alarm_cs_ss5 <= (NOT(fsm_alarm_cs(1)) AND NOT(fsm_alarm_cs(0)));
+  fsm_alarm_ns_ss6 <= ((fsm_alarm_cs_ss0 AND (((code(0) OR NOT(code(1))
+ OR code(2)) AND NOT(code(3))) OR ((NOT(day_time) 
+OR NOT(code(0)) OR code(1) OR NOT(code(2))) AND 
+code(3)))) OR (fsm_alarm_cs_ss1 AND (((code(0) OR NOT(
+code(1)) OR NOT(code(2))) AND NOT(code(3))) OR ((NOT(
+day_time) OR NOT(code(0)) OR code(1) OR NOT(code(2))) AND
+ code(3)))) OR (fsm_alarm_cs_ss2 AND (((code(0) OR
+ NOT(code(1))) AND NOT(code(2))) OR ((NOT(day_time
+) OR NOT(code(0)) OR code(1)) AND code(2)) OR NOT(
+code(3)))) OR (fsm_alarm_cs_ss3 AND (((code(0) OR 
+code(1) OR code(2)) AND NOT(code(3))) OR ((NOT(day_time)
+ OR NOT(code(0)) OR code(1) OR NOT(code(2))) AND 
+code(3)))) OR (fsm_alarm_cs_ss4 AND (((NOT(day_time) OR 
+NOT(code(0)) OR code(1) OR NOT(code(2))) AND code(3)
+) OR NOT(code(0)) OR code(1) OR NOT(code(2)))));
+  fsm_alarm_cs_ss6 <= (fsm_alarm_cs(2) AND NOT(fsm_alarm_cs(0)));
+  label0 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs(0) <= GUARDED (fsm_alarm_ns(0) OR reset);
+  END BLOCK label0;
+  label1 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs(1) <= GUARDED (fsm_alarm_ns(1) AND NOT(reset));
+  END BLOCK label1;
+  label2 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    fsm_alarm_cs(2) <= GUARDED (fsm_alarm_ns(2) AND NOT(reset));
+  END BLOCK label2;
+
+alarm <= (fsm_alarm_cs_ss6 AND NOT(reset));
+
+door <= (fsm_alarm_cs_ss5 AND NOT(reset));
+END;

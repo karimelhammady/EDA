@@ -1,0 +1,9 @@
+# Encoding figure "fsm_alarm"
+-fsm_alarm a 3
+ss6	0
+ss5	4
+ss4	3
+ss3	1
+ss2	6
+ss1	2
+ss0	5

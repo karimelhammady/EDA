@@ -1,0 +1,62 @@
+-- VHDL data flow description generated from `sdetm_b`
+--		date : Tue Apr 30 21:03:10 2019
+
+
+-- Entity Declaration
+
+ENTITY sdetm_b IS
+  PORT (
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  day_time : in BIT;	-- day_time
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  clk : in BIT;	-- clk
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END sdetm_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF sdetm_b IS
+  SIGNAL fsm_alarm_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- fsm_alarm_cs
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+
+BEGIN
+  aux3 <= (NOT(code(0)) AND code(1));
+  aux2 <= (aux0 OR reset);
+  aux1 <= NOT(NOT(fsm_alarm_cs(2)) AND fsm_alarm_cs(1));
+  aux0 <= (NOT(fsm_alarm_cs(2)) AND NOT(fsm_alarm_cs(1)));
+  label0 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (0) <= GUARDED ((((NOT(code(3)) AND fsm_alarm_cs(2) AND NOT(
+fsm_alarm_cs(1)) AND NOT(fsm_alarm_cs(0)) AND code(2)) OR (
+code(3) AND fsm_alarm_cs(1) AND fsm_alarm_cs(0) AND NOT(
+code(2)))) AND NOT(reset) AND aux3) OR ((((NOT(code(3)) 
+OR day_time) AND NOT(aux1) AND NOT(fsm_alarm_cs(0))
+) OR (code(3) AND NOT(aux0) AND day_time)) AND 
+code(2) AND NOT(reset) AND code(0) AND NOT(code(1))));
+  END BLOCK label0;
+  label1 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (1) <= GUARDED (aux2 OR (NOT(code(3)) AND NOT(fsm_alarm_cs(1)) 
+AND NOT(fsm_alarm_cs(0)) AND code(2) AND aux3) OR (
+NOT(code(3)) AND aux1 AND fsm_alarm_cs(0) AND NOT(
+code(2)) AND NOT(code(0)) AND NOT(code(1))));
+  END BLOCK label1;
+  label2 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    fsm_alarm_cs (2) <= GUARDED (((NOT(code(3)) OR fsm_alarm_cs(0)) AND (code(3) 
+OR fsm_alarm_cs(2)) AND fsm_alarm_cs(1) AND NOT(
+code(2)) AND aux3) OR aux2);
+  END BLOCK label2;
+
+alarm <= (aux0 AND NOT(fsm_alarm_cs(0)) AND NOT(reset));
+
+door <= (aux0 AND fsm_alarm_cs(0) AND NOT(reset));
+END;
